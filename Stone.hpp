@@ -21,12 +21,10 @@ public:
 
     // Trafienie blokiem
     void trafienie() {
-        if (m_jestZniszczony)
-            return;
+        if (m_jestZniszczony) return;
         m_punktyZycia--;
         aktualizujKolor();
-        if (m_punktyZycia <= 0)
-            m_jestZniszczony = true;
+        if (m_punktyZycia <= 0) m_jestZniszczony = true;
     }
 
     // Aktualizacja koloru na podstawie punktów życia
