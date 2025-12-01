@@ -39,3 +39,4 @@ void Stone::draw(sf::RenderTarget& target) const {
         target.draw(*this);
     }
 }
+
