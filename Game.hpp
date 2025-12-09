@@ -14,12 +14,14 @@ private:
     float m_windowHeight;
     bool m_gameOver = false;
 
+    int m_score = 0; // aktualny wynik
+
 public:
     Game(float windowWidth = 800.f, float windowHeight = 600.f);
-
     void update(sf::Time dt);
     void render(sf::RenderTarget& target) const;
-
     bool isGameOver() const { return m_gameOver; }
     void reset(); // reset stanu gry
+    int getScore() const { return m_score; }
+    void addScore(int pts) { m_score += pts; }
 };
