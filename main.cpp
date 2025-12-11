@@ -8,7 +8,7 @@ enum class GameState { Menu, Playing, Scores, Exiting };
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(60);// ograniczenie do 60FPS
 
     Menu menu(window.getSize().x, window.getSize().y);
     Game game;
@@ -27,7 +27,7 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) window.close();
 
-            // MENU
+            //obluga menu
             if (currentState == GameState::Menu && event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Up) menu.przesunG();
                 if (event.key.code == sf::Keyboard::Down) menu.przesunD();
@@ -39,20 +39,21 @@ int main() {
                 }
             }
 
-            // OBSŁUGA GRY
+            // obsluga gry
             if (currentState == GameState::Playing && event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) currentState = GameState::Menu;
             }
 
-            // OBSŁUGA WYNIKÓW
+            // obsluga wynikow
             if (currentState == GameState::Scores && event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) currentState = GameState::Menu;
             }
         }
-
+        // aktualizjcja gry
         if (currentState == GameState::Playing) {
             game.update(dt);
 
+            //sprawdzenie czy gra sie skonczyla
             if (game.isGameOver()) {
                 std::cout << "Koniec gry! Wracamy do menu.\n";
 
@@ -67,9 +68,11 @@ int main() {
 
         window.clear(sf::Color::Black);
 
+        //renderowanie w zaleznosci od stanu gry
         if (currentState == GameState::Menu) menu.draw(window);
         else if (currentState == GameState::Playing) game.render(window);
         else if (currentState == GameState::Scores) {
+            //wyswietlanie ostatnich wynikow
             sf::Text scoresText;
             scoresText.setFont(font);
             scoresText.setCharacterSize(30);
