@@ -41,7 +41,7 @@ public:
         shape.setPosition(x, y);
     }
 
-    void setPosition(const sf::Vector2f& pos) {  // DODANE dla GameState
+    void setPosition(const sf::Vector2f& pos) {  
         x = pos.x;
         y = pos.y;
         shape.setPosition(x, y);
@@ -51,9 +51,17 @@ public:
         target.draw(shape);
     }
 
-    float getX() const { return x; }
-    float getY() const { return y; }
-    float getSzerokosc() const { return szerokosc; }
-    float getWysokosc() const { return wysokosc; }
+    float getX() const { 
+        return x; 
+    }
+    float getY() const { 
+        return y; 
+    }
+    float getSzerokosc() const { 
+        return szerokosc; 
+    }
+    float getWysokosc() const { 
+        return wysokosc; 
+    }
 };
 
