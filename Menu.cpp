@@ -3,8 +3,9 @@
 Menu::Menu(float width, float height) {
     if (!font.loadFromFile("E:/Windows/Fonts/arial.ttf")) return; // upewnienie się, że czcionka istnieje
 
+    //konfiguracja elementow menu
     menu[0].setFont(font);
-    menu[0].setFillColor(sf::Color::Cyan);  // pierwszy element podświetlony
+    menu[0].setFillColor(sf::Color::Cyan);  
     menu[0].setString("Nowa gra");
     menu[0].setPosition(width / 3.f, height / (MAX_LICZBA_POZIOMOW + 1) * 1);
 
@@ -19,6 +20,7 @@ Menu::Menu(float width, float height) {
     menu[2].setPosition(width / 3.f, height / (MAX_LICZBA_POZIOMOW + 1) * 3);
 }
 
+//przseuwanie w gore
 void Menu::przesunG() {
     menu[selectedItem].setFillColor(sf::Color::White);
     menu[selectedItem].setStyle(sf::Text::Regular);
@@ -27,7 +29,7 @@ void Menu::przesunG() {
     menu[selectedItem].setFillColor(sf::Color::Cyan);
     menu[selectedItem].setStyle(sf::Text::Bold);
 }
-
+//przesunwanie w dol
 void Menu::przesunD() {
     menu[selectedItem].setFillColor(sf::Color::White);
     menu[selectedItem].setStyle(sf::Text::Regular);
@@ -36,7 +38,7 @@ void Menu::przesunD() {
     menu[selectedItem].setFillColor(sf::Color::Cyan);
     menu[selectedItem].setStyle(sf::Text::Bold);
 }
-
+//rysowanie menu
 void Menu::draw(sf::RenderWindow& window) const {
     for (int i = 0; i < MAX_LICZBA_POZIOMOW; i++)
         window.draw(menu[i]);
