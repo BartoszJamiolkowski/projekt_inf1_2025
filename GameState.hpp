@@ -6,6 +6,7 @@
 #include "Pilka.hpp"
 #include "Stone.hpp"
 
+//struktura do przechowywania danych o klockach
 struct BlockData {
     float x, y;
     int hp;
@@ -21,11 +22,8 @@ private:
 public:
     GameState() = default;
 
-    void capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& stones);
-
-    bool saveToFile(const std::string& filename);
-    bool loadFromFile(const std::string& filename);
-
-    void apply(Paletka& p, Pilka& b, std::vector<Stone>& stones);
+    void capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& stones);//zapis stanu gry
+    bool saveToFile(const std::string& filename);//zapis do pliku
+    bool loadFromFile(const std::string& filename);//odczyt z pliku
+    void apply(Paletka& p, Pilka& b, std::vector<Stone>& stones);//przywrocenie stanu gry
 };
-
