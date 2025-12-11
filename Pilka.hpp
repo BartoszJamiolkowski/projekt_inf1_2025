@@ -4,9 +4,9 @@
 
 class Pilka {
 private:
-    float x, y;
-    float vx, vy;
-    float radius;
+    float x, y; //pozycja pilki
+    float vx, vy;//predkosc
+    float radius;//promien
     sf::CircleShape shape;
 
 public:
@@ -25,16 +25,28 @@ public:
         shape.setPosition(x, y);
     }
 
-    void bounceX() { vx = -vx; }
-    void bounceY() { vy = -vy; }
+    //odbicie pilki
+    void bounceX() {
+        vx = -vx; 
+    }
+    void bounceY() { 
+        vy = -vy; 
+    }
 
     void collideWalls(float width, float height) {
-        if (x - radius <= 0.f) { x = radius; bounceX(); }
-        if (x + radius >= width) { x = width - radius; bounceX(); }
-        if (y - radius <= 0.f) { y = radius; bounceY(); }
+        if (x - radius <= 0.f) { 
+            x = radius; bounceX(); 
+        }
+        if (x + radius >= width) { 
+            x = width - radius; bounceX(); 
+        }
+        if (y - radius <= 0.f) { 
+            y = radius; bounceY(); 
+        }
         shape.setPosition(x, y);
     }
 
+    //kolzija z paletka
     bool collidePaddle(const Paletka& p) {
         float palLeft = p.getX() - p.getSzerokosc() / 2.f;
         float palRight = p.getX() + p.getSzerokosc() / 2.f;
@@ -51,6 +63,7 @@ public:
         return false;
     }
 
+    //kolzija z krawedziami 
     void setPosition(float nx, float ny) {
         x = nx;
         y = ny;
@@ -62,7 +75,8 @@ public:
         vy = nvy;
     }
 
-    void reset(const sf::Vector2f& pos, const sf::Vector2f& vel) {  // DODANE dla GameState
+    //reset pozycji i predkosci
+    void reset(const sf::Vector2f& pos, const sf::Vector2f& vel) {  
         x = pos.x;
         y = pos.y;
         vx = vel.x;
@@ -74,9 +88,19 @@ public:
         target.draw(shape);
     }
 
-    float getX() const { return x; }
-    float getY() const { return y; }
-    float getVx() const { return vx; }
-    float getVy() const { return vy; }
-    float getRadius() const { return radius; }
+    float getX() const {
+        return x; 
+    }
+    float getY() const { 
+        return y; 
+    }
+    float getVx() const { 
+        return vx; 
+    }
+    float getVy() const {
+        return vy; 
+    }
+    float getRadius() const { 
+        return radius; 
+    }
 };
