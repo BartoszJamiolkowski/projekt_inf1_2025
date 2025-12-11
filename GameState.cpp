@@ -3,7 +3,7 @@
 #include <string>
 
 void GameState::capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& stones)
-{
+{   //zapis aktualnej pozycji paletki i piłki
     paddlePosition = sf::Vector2f(p.getX(), p.getY());
     ballPosition = sf::Vector2f(b.getX(), b.getY());
     ballVelocity = sf::Vector2f(b.getVx(), b.getVy());
@@ -23,13 +23,15 @@ void GameState::capture(const Paletka& p, const Pilka& b, const std::vector<Ston
 }
 
 bool GameState::saveToFile(const std::string& filename)
-{
+{   //proba otwarcia pliku do zapisu
     std::ofstream file(filename);
     if (!file.is_open()) return false;
 
+    //zapsis pozycji paletki, pilki i blokow do pliku 
     file << "PADDLE " << paddlePosition.x << " " << paddlePosition.y << "\n";
     file << "BALL " << ballPosition.x << " " << ballPosition.y << " "
         << ballVelocity.x << " " << ballVelocity.y << "\n";
+    //liczba blokow
     file << "BLOCKS_COUNT " << blocks.size() << "\n";
 
     for (const auto& b : blocks)
@@ -63,20 +65,22 @@ bool GameState::loadFromFile(const std::string& filename)
 }
 
 void GameState::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones)
-{
+{   
+    // przywrocenie pozycji paletki i piłki
     p.setPosition(paddlePosition);
     b.reset(ballPosition, ballVelocity);
 
     stones.clear();
 
-    // Rozmiar bloków taki sam jak w konstruktorze Game.cpp
+    // rozmiary blokow i rozmieszczenie
     const int ILOSC_KOLUMN = 6;
     const float PRZERWA = 2.f;
     const float ROZMIAR_BLOKU_Y = 25.f;
     const float ROZMIAR_BLOKU_X = (800.f - (ILOSC_KOLUMN - 1) * PRZERWA) / ILOSC_KOLUMN; // stała szerokość
 
     sf::Vector2f blockSize(ROZMIAR_BLOKU_X, ROZMIAR_BLOKU_Y);
-
+    
+    //odtwarzanie każdego bloku na podstawie danych z pliku
     for (const auto& bd : blocks) {
         stones.emplace_back(sf::Vector2f(bd.x, bd.y), blockSize, bd.hp);
     }
